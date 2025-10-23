@@ -38,7 +38,7 @@ all:
           VN_MAD: bridge          # modo bridge + VLAN ID => VLAN 802.1Q
           #PHYDEV: br3501
           BRIDGE: br3501
-          VLAN_ID: 3501
+          #VLAN_ID: 3501
           GUEST_MTU: 1500
           AR:
             TYPE: IP4
