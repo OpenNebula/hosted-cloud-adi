@@ -49,11 +49,11 @@ all:
 
 frontend:
   hosts:
-    fe:
+    opennebula-frontend:
       ansible_host: 10.100.193.38
       ansible_connection: local
       ansible_python_interpreter: /usr/bin/python3
 node:
   hosts:
-    host01:
+    opennebula-kvm:
       ansible_host: 10.100.193.39
