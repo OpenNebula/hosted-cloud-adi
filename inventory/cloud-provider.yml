@@ -24,8 +24,8 @@ all:
         managed: true
         template:
           VN_MAD: bridge
-          PHYDEV: br3501          # bridge físico para salida de VMs
-          BRIDGE: br0
+          #PHYDEV: br3501          # bridge físico para salida de VMs
+          BRIDGE: br3501
           # Sin bloque AR: las VMs usarán NAT del host
           DNS: 9.9.9.9
           NETWORK_MASK: 255.255.255.0
@@ -36,8 +36,8 @@ all:
         managed: true
         template:
           VN_MAD: bridge          # modo bridge + VLAN ID => VLAN 802.1Q
-          PHYDEV: br3501
-          BRIDGE: br1
+          #PHYDEV: br3501
+          BRIDGE: br3501
           VLAN_ID: 3501
           GUEST_MTU: 1500
           AR:
