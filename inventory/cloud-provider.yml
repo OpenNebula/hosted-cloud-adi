@@ -13,42 +13,46 @@ all:
       evpn: false
 
     one_version: '7.0'
-    one_pass: '<<TBA>>'
+    # Contraseña GUI (usuario oneadmin)
+    one_pass: 'oneadmin'
+
     db_backend: SQLite
+
     vn:
+      # Red pública (sin IP definida; salida NAT)
       pubridge:
         managed: true
         template:
           VN_MAD: bridge
-          PHYDEV: <<TBA>>
+          PHYDEV: br3501          # bridge físico para salida de VMs
           BRIDGE: br0
-          AR:
-            TYPE: IP4
-            IP: <<TBA>>
-            SIZE: <<TBA>>
-          DNS: <<TBA>>
-          NETWORK_MASK: <<TBA>>
-          GATEWAY: <<TBA>>
+          # Sin bloque AR: las VMs usarán NAT del host
+          DNS: 9.9.9.9
+          NETWORK_MASK: 255.255.255.0
+          GATEWAY: 10.101.101.1      # gateway interno del NAT del host KVM (ajustable)
+
+      # Red VLAN interna para las VMs (VLAN 3501)
       vxlan:
         managed: true
         template:
-          VN_MAD: vxlan
-          PHYDEV: <<TBA>>
+          VN_MAD: bridge          # modo bridge + VLAN ID => VLAN 802.1Q
+          PHYDEV: br3501
           BRIDGE: br1
-          VLAN_ID: <<TBA>>
-          GUEST_MTU: 1450
+          VLAN_ID: 3501
+          GUEST_MTU: 1500
           AR:
             TYPE: IP4
-            IP: <<TBA>>
-            SIZE: <<TBA>>
-          NETWORK_ADDRESS: <<TBA>>
-          NETWORK_MASK: <<TBA>>
+            IP: 10.101.101.50       # rango interno de las VMs
+            SIZE: 50
+          NETWORK_ADDRESS: 10.101.101.0
+          NETWORK_MASK: 255.255.255.0
 
 frontend:
   hosts:
-    fe: { ansible_host: <<TBA>> }
+    fe:
+      ansible_host: 10.100.193.38
 
 node:
   hosts:
-    host01: { ansible_host: <<TBA>> }
-    host02: { ansible_host: <<TBA>> }
+    host01:
+      ansible_host: 10.100.193.39
