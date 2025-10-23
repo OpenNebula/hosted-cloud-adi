@@ -1,4 +1,3 @@
----
 all:
   vars:
     ansible_user: root
@@ -19,33 +18,25 @@ all:
     db_backend: SQLite
 
     vn:
-      # Red pública (sin IP definida; salida NAT)
-      pubridge:
-        managed: true
-        template:
-          VN_MAD: bridge
-          #PHYDEV: br3501          # bridge físico para salida de VMs
-          BRIDGE: br3501
-          # Sin bloque AR: las VMs usarán NAT del host
-          DNS: 9.9.9.9
-          NETWORK_MASK: 255.255.255.0
-          GATEWAY: 10.101.101.1      # gateway interno del NAT del host KVM (ajustable)
-
-      # Red VLAN interna para las VMs (VLAN 3501)
+      # Red interna de VMs (sobre br3501) con IPAM y parámetros de red completos
       vxlan:
         managed: true
         template:
-          VN_MAD: bridge          # modo bridge + VLAN ID => VLAN 802.1Q
-          #PHYDEV: br3501
+          VN_MAD: bridge
           BRIDGE: br3501
-          #VLAN_ID: 3501
           GUEST_MTU: 1500
+
+          # Rango de IPs que OpenNebula reservará y entregará por contextualización
           AR:
             TYPE: IP4
-            IP: 10.101.101.50       # rango interno de las VMs
+            IP: 10.101.101.50
             SIZE: 50
+
+          # Parámetros de red para auto-configuración en la VM
           NETWORK_ADDRESS: 10.101.101.0
           NETWORK_MASK: 255.255.255.0
+          GATEWAY: 10.101.101.12
+          DNS: 9.9.9.9
 
 frontend:
   hosts:
@@ -53,6 +44,7 @@ frontend:
       ansible_host: 10.100.193.38
       ansible_connection: local
       ansible_python_interpreter: /usr/bin/python3
+
 node:
   hosts:
     opennebula-kvm:
