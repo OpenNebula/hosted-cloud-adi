@@ -51,7 +51,8 @@ frontend:
   hosts:
     fe:
       ansible_host: 10.100.193.38
-
+      ansible_connection: local
+      ansible_python_interpreter: /usr/bin/python3
 node:
   hosts:
     host01:
