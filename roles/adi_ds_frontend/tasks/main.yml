@@ -1,0 +1,49 @@
+---
+- name: Asegurar que OpenNebula responde
+  become: true
+  become_user: oneadmin
+  command: oneuser show
+  changed_when: false
+
+- name: Escribir plantillas temporales de datastores
+  become: true
+  become_user: oneadmin
+  copy:
+    content: "{{ item.value.template }}"
+    dest: "/var/tmp/ds_{{ item.key }}.tmpl"
+    mode: "0644"
+  loop: "{{ adi_specifics.datastores | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Crear datastore si no existe (por ID)
+  become: true
+  become_user: oneadmin
+  shell: |
+    onedatastore show {{ item.value.id }} >/dev/null 2>&1 || \
+    onedatastore create /var/tmp/ds_{{ item.key }}.tmpl --id {{ item.value.id }}
+  args: { executable: /bin/bash }
+  register: create_out
+  changed_when: create_out.rc == 0 and create_out.stdout != ""
+  loop: "{{ adi_specifics.datastores | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Actualizar plantilla del datastore (estado deseado)
+  become: true
+  become_user: oneadmin
+  shell: |
+    onedatastore update {{ item.value.id }} /var/tmp/ds_{{ item.key }}.tmpl --append false
+  args: { executable: /bin/bash }
+  register: update_out
+  changed_when: update_out.rc == 0
+  loop: "{{ adi_specifics.datastores | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Listar datastores
+  become: true
+  become_user: oneadmin
+  command: onedatastore list
+  changed_when: false
+
