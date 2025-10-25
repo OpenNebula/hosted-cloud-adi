@@ -12,27 +12,20 @@ all:
       evpn: false
 
     one_version: '7.0'
-    # Contraseña GUI (usuario oneadmin)
     one_pass: 'oneadmin'
-
     db_backend: SQLite
 
     vn:
-      # Red interna de VMs (sobre br3501) con IPAM y parámetros de red completos
       vxlan:
         managed: true
         template:
           VN_MAD: bridge
           BRIDGE: br3501
           GUEST_MTU: 1500
-
-          # Rango de IPs que OpenNebula reservará y entregará por contextualización
           AR:
             TYPE: IP4
             IP: 10.101.101.50
             SIZE: 50
-
-          # Parámetros de red para auto-configuración en la VM
           NETWORK_ADDRESS: 10.101.101.0
           NETWORK_MASK: 255.255.255.0
           GATEWAY: 10.101.101.12
@@ -41,49 +34,48 @@ all:
     # =========================
     # Datastores OpenNebula
     # =========================
-   ds:
-  mode: generic
-  config:
-    SYSTEM_DS:
-      system:
-        id: 0
-        managed: true
-        enabled: true
-        symlink:
-          groups: [node]
-          src: /var/lib/one/datastores/   # no crea symlink real, es el patrón soportado
-        template:
-          TYPE: SYSTEM_DS
-          TM_MAD: fs_lvm
-          DISK_TYPE: BLOCK
-          VG_NAME: onevg
+    ds:
+      mode: generic
+      config:
+        SYSTEM_DS:
+          system:
+            id: 0
+            managed: true
+            enabled: true
+            symlink:
+              groups: [node]
+              src: /var/lib/one/datastores/
+            template:
+              TYPE: SYSTEM_DS
+              TM_MAD: fs_lvm
+              DISK_TYPE: BLOCK
+              VG_NAME: onevg
 
-    IMAGE_DS:
-      images:
-        id: 1
-        managed: true
-        symlink:
-          groups: [frontend, node]
-          src: /var/lib/one/datastores/
-        template:
-          TYPE: IMAGE_DS
-          DS_MAD: fs
-          TM_MAD: fs_lvm
-          DISK_TYPE: BLOCK
-          VG_NAME: onevg
+        IMAGE_DS:
+          images:
+            id: 1
+            managed: true
+            symlink:
+              groups: [frontend, node]   # staging en FE + uso en KVM
+              src: /var/lib/one/datastores/
+            template:
+              TYPE: IMAGE_DS
+              DS_MAD: fs
+              TM_MAD: fs_lvm
+              DISK_TYPE: BLOCK
+              VG_NAME: onevg
 
-    FILE_DS:
-      files:
-        id: 2
-        managed: true
-        symlink:
-          groups: [frontend]
-          src: /var/lib/one/datastores/
-        template:
-          TYPE: FILE_DS
-          DS_MAD: fs
-          TM_MAD: ssh 
-
+        FILE_DS:
+          files:
+            id: 2
+            managed: true
+            symlink:
+              groups: [frontend]
+              src: /var/lib/one/datastores/
+            template:
+              TYPE: FILE_DS
+              DS_MAD: fs
+              TM_MAD: ssh
 
 frontend:
   hosts:
@@ -96,3 +88,4 @@ node:
   hosts:
     opennebula-kvm:
       ansible_host: 10.100.193.39
+
