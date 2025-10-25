@@ -49,3 +49,27 @@
   command: onedatastore list
   changed_when: false
 
+- name: Añadir datastores al cluster 0
+  become: true
+  become_user: oneadmin
+  shell: |
+    onecluster show 0 | grep -qE "(^|[^0-9]){{ item.value.id }}([^0-9]|$)" || onecluster adddatastore 0 {{ item.value.id }}
+  args:
+    executable: /bin/bash
+  loop: "{{ adi_specifics.datastores | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+  register: add_ds
+  changed_when: add_ds.rc == 0
+  failed_when: false
+
+- name: Añadir host al cluster 0
+  become: true
+  become_user: oneadmin
+  shell: |
+    onecluster show 0 | grep -qE "(^|[^0-9])0([^0-9]|$)" || onecluster addhost 0 0
+  args:
+    executable: /bin/bash
+  changed_when: false
+  failed_when: false
+
