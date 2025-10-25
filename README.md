@@ -1,6 +1,6 @@
 <img width="1335" height="353" alt="logo_adi_opennebula" src="https://github.com/user-attachments/assets/4a1e25ac-6ef6-4ec2-8acd-abc49aa113c4" />
 
-# Deploying OpenNebula as a Hosted Cloud on TBA-cloud-provider
+# Deploying OpenNebula as a Hosted Cloud on TBA-aDi
 
 This repository contains the needed code and documentation to perform an OpenNebula deployment and configuration as 
 a Hosted Cloud on **adi** resources. It extends the [one-deploy-validation](https://github.com/OpenNebula/one-deploy-validation) repository, which is added as a git submodule.
