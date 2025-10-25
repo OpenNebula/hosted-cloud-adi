@@ -33,13 +33,15 @@
   become: true
   become_user: oneadmin
   shell: |
-    onedatastore update {{ item.value.id }} /var/tmp/ds_{{ item.key }}.tmpl --append false
-  args: { executable: /bin/bash }
+    onedatastore update {{ item.value.id }} /var/tmp/ds_{{ item.key }}.tmpl
+  args:
+    executable: /bin/bash
   register: update_out
   changed_when: update_out.rc == 0
   loop: "{{ adi_specifics.datastores | dict2items }}"
   loop_control:
     label: "{{ item.key }}"
+
 
 - name: Listar datastores
   become: true
