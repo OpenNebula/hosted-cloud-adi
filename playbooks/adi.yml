@@ -1,0 +1,7 @@
+---
+- hosts: "{{ frontend_group | d('frontend') }}"
+  gather_facts: false
+  any_errors_fatal: true
+  roles:
+    - role: adi_ds_frontend
+      when: adi_specifics_enabled | default(false)
