@@ -41,40 +41,48 @@ all:
     # =========================
     # Datastores OpenNebula
     # =========================
-    ds:
-      # IMAGES sobre LVM local del host (VG=onevg)
-      images:
+   ds:
+  mode: generic
+  config:
+    SYSTEM_DS:
+      system:
+        id: 0
         managed: true
+        enabled: true
+        symlink:
+          groups: [node]
+          src: /var/lib/one/datastores/   # no crea symlink real, es el patrón soportado
         template:
-          NAME: images
+          TYPE: SYSTEM_DS
+          TM_MAD: fs_lvm
+          DISK_TYPE: BLOCK
+          VG_NAME: onevg
+
+    IMAGE_DS:
+      images:
+        id: 1
+        managed: true
+        symlink:
+          groups: [frontend, node]
+          src: /var/lib/one/datastores/
+        template:
           TYPE: IMAGE_DS
           DS_MAD: fs
           TM_MAD: fs_lvm
           DISK_TYPE: BLOCK
           VG_NAME: onevg
-          SAFE_DIRS: "/var/tmp"
-          RESTRICTED_DIRS: "/"
 
-      # SYSTEM sobre LVM local del host (VG=onevg)
-      system:
-        managed: true
-        template:
-          NAME: system
-          TYPE: SYSTEM_DS
-          TM_MAD: fs_lvm
-          DISK_TYPE: BLOCK
-          VG_NAME: onevg
-          SAFE_DIRS: "/var/tmp"
-          RESTRICTED_DIRS: "/"
-
-      # FILES en el frontend (kernels/initrd/context)
+    FILE_DS:
       files:
+        id: 2
         managed: true
+        symlink:
+          groups: [frontend]
+          src: /var/lib/one/datastores/
         template:
-          NAME: files
           TYPE: FILE_DS
           DS_MAD: fs
-          TM_MAD: ssh
+          TM_MAD: ssh 
 
 
 frontend:
