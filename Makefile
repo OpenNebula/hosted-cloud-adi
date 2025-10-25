@@ -1,25 +1,25 @@
 SELF  := $(patsubst %/,%,$(dir $(abspath $(firstword $(MAKEFILE_LIST)))))
 
 ENV_RUN      = hatch env run -e $(1) --
-ENV_CSP_DEFAULT := $(shell hatch env find cloud-provider-default)
+ENV_CSP_DEFAULT := $(shell hatch env find adi-default)
 
 ifdef ENV_CSP_DEFAULT
 $(ENV_CSP_DEFAULT):
-	hatch env create cloud-provider-default
+	hatch env create adi-default
 endif
 
-.PHONY: submodule-requirements deployment validation cloud-provider
+.PHONY: submodule-requirements deployment validation adi
 
 submodule-requirements:
 	$(MAKE) -C submodule-one-deploy requirements
 
 # Explicitly expose these targets to the parent Makefile.
 validation:
-	$(MAKE) -C submodule-one-deploy-validation I=$(SELF)/inventory/cloud-provider.yml $@
+	$(MAKE) -C submodule-one-deploy-validation I=$(SELF)/inventory/adi.yml $@
 
 deployment: 
-	$(MAKE) -C submodule-one-deploy I=$(SELF)/inventory/cloud-provider.yml main
+	$(MAKE) -C submodule-one-deploy I=$(SELF)/inventory/adi.yml main
 
 specifics: $(ENV_CSP_DEFAULT)
 	cd $(SELF)/ && \
-	$(call ENV_RUN,cloud-provider-default) ansible-playbook $(SELF)/playbooks/cloud-provider.yml
+	$(call ENV_RUN,adi-default) ansible-playbook $(SELF)/playbooks/adi.yml
