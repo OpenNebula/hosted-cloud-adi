@@ -31,58 +31,12 @@ all:
           GATEWAY: 10.101.101.12
           DNS: 9.9.9.9
 
-    # =========================
-    # Datastores OpenNebula
-    # =========================
-    ds:
-      mode: generic
-      config:
-        SYSTEM_DS:
-          system:
-            id: 0
-            managed: true
-            enabled: true
-            symlink:
-              groups: [node]
-              src: /var/lib/one/datastores/
-            template:
-              TYPE: SYSTEM_DS
-              TM_MAD: fs_lvm
-              DISK_TYPE: BLOCK
-              VG_NAME: onevg
-
-        IMAGE_DS:
-          images:
-            id: 1
-            managed: true
-            symlink:
-              groups: [frontend, node]   # staging en FE + uso en KVM
-              src: /var/lib/one/datastores/
-            template:
-              TYPE: IMAGE_DS
-              DS_MAD: fs
-              TM_MAD: fs_lvm
-              DISK_TYPE: BLOCK
-              VG_NAME: onevg
-
-        FILE_DS:
-          files:
-            id: 2
-            managed: true
-            symlink:
-              groups: [frontend]
-              src: /var/lib/one/datastores/
-            template:
-              TYPE: FILE_DS
-              DS_MAD: fs
-              TM_MAD: ssh
-
 frontend:
   hosts:
     opennebula-frontend:
       ansible_host: 10.100.193.38
       ansible_connection: local
-      ansible_python_interpreter: /usr/bin/python3
+      
 
 node:
   hosts:
