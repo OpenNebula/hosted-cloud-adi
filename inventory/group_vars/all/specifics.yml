@@ -5,7 +5,7 @@ adi_nfs_fstype: "xfs"                       # si no estás seguro, puedes usar "
 
 # Export NFS (KVM -> frontend)
 adi_nfs_frontend_host: "10.100.193.38"  # o su IP: "10.100.193.38"
-adi_nfs_export_opts: "rw,sync,no_root_squash,no_subtree_check"
+adi_nfs_export_opts: "rw,sync,no_root_squash,no_subtree_check,nohide"
 
 # Cliente NFS en el FRONTEND (a qué servidor conectarse)
 adi_nfs_server: "10.100.193.39"            # o IP del KVM: "10.100.193.39"
