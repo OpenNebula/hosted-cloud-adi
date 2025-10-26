@@ -1,27 +1,12 @@
-adi_specifics_enabled: true
+# Disco y ruta en el HOST KVM
+adi_nfs_device: "/dev/vdb1"                 # ya formateado (no formateamos)
+adi_nfs_mount: "/var/lib/one/datastores"
+adi_nfs_fstype: "xfs"                       # si no estás seguro, puedes usar "auto"
 
-adi_specifics:
-  datastores:
-    system:
-      id: 0
-      template: |
-        NAME      = "SYSTEM_DS"
-        TYPE      = SYSTEM_DS
-        TM_MAD    = fs_lvm
-        DISK_TYPE = BLOCK
-        VG_NAME   = onevg
-    images:
-      id: 1
-      template: |
-        NAME      = "IMAGE_DS"
-        TYPE      = IMAGE_DS
-        DS_MAD    = fs
-        TM_MAD    = fs_lvm
-        DISK_TYPE = BLOCK
-        VG_NAME   = onevg
-    files:
-      id: 2
-      template: |
-        NAME   = "FILE_DS"
-        TYPE   = FILE_DS
-        DS_MAD = fs
+# Export NFS (KVM -> frontend)
+adi_nfs_frontend_host: "opennebula-frontend"  # o su IP: "10.100.193.38"
+adi_nfs_export_opts: "rw,sync,no_root_squash,no_subtree_check"
+
+# Cliente NFS en el FRONTEND (a qué servidor conectarse)
+adi_nfs_server: "opennebula-kvm"            # o IP del KVM: "10.100.193.39"
+
