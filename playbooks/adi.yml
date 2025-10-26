@@ -10,6 +10,8 @@
 - hosts: "{{ frontend_group | d('frontend') }}"
   gather_facts: false
   any_errors_fatal: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3 
   roles:
     - role: adi_storage_frontend
 
