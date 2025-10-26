@@ -3,16 +3,16 @@
 # - Monta /dev/vdb1 en /var/lib/one/datastores (persistente)
 # - Instala y configura NFS server
 # - Exporta /var/lib/one/datastores al frontend
-# NO toca permisos ni datastores de OpenNebula.
+# - Ajusta permisos para oneadmin
 
 - name: Asegurar carpeta de montaje existe
-  file:
+  ansible.builtin.file:
     path: "{{ adi_nfs_mount }}"
     state: directory
     mode: "0755"
 
 - name: Montar {{ adi_nfs_device }} en {{ adi_nfs_mount }} (persistente)
-  mount:
+  ansible.builtin.mount:
     path: "{{ adi_nfs_mount }}"
     src: "{{ adi_nfs_device }}"
     fstype: "{{ adi_nfs_fstype }}"
@@ -20,27 +20,30 @@
     state: mounted
 
 - name: Instalar NFS server
-  apt:
+  ansible.builtin.apt:
     name: nfs-kernel-server
     state: present
     update_cache: true
 
 - name: Declarar export NFS al frontend (por nombre o IP)
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/exports
     line: "{{ adi_nfs_mount }} {{ adi_nfs_frontend_host }}({{ adi_nfs_export_opts }})"
     state: present
     create: yes
 
 - name: Aplicar exportfs y (re)iniciar servicio NFS
-  shell: |
+  ansible.builtin.shell: |
     exportfs -ra
     systemctl enable nfs-server
     systemctl restart nfs-server
   args:
     executable: /bin/bash
+  become: true
 
-    - name: Ajustar propietario recursivo del datastore al usuario oneadmin
+# --- Tareas finales para asegurar permisos correctos ---
+
+- name: Ajustar propietario recursivo del datastore al usuario oneadmin
   ansible.builtin.file:
     path: /var/lib/one/datastores
     owner: oneadmin
@@ -54,3 +57,4 @@
     mode: "0755"
     state: directory
   become: true
+
