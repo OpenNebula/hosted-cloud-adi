@@ -39,3 +39,18 @@
     systemctl restart nfs-server
   args:
     executable: /bin/bash
+
+    - name: Ajustar propietario recursivo del datastore al usuario oneadmin
+  ansible.builtin.file:
+    path: /var/lib/one/datastores
+    owner: oneadmin
+    group: oneadmin
+    recurse: yes
+  become: true
+
+- name: Ajustar permisos 755 en el datastore raíz
+  ansible.builtin.file:
+    path: /var/lib/one/datastores
+    mode: "0755"
+    state: directory
+  become: true
