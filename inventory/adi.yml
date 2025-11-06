@@ -16,6 +16,7 @@ all:
     db_backend: SQLite
 
     vn:
+      # Red "pública" qbr3501 en el host para salir por NAT
       vxlan:
         managed: true
         template:
@@ -24,12 +25,28 @@ all:
           GUEST_MTU: 1500
           AR:
             TYPE: IP4
-            IP: 10.101.101.50
-            SIZE: 50
+            IP: 10.101.101.50   # Inicio rango
+            SIZE: 50            # 50 IPs (10.101.101.50–10.101.101.99)
           NETWORK_ADDRESS: 10.101.101.0
           NETWORK_MASK: 255.255.255.0
           GATEWAY: 10.101.101.12
           DNS: 9.9.9.9
+
+      # Red interna entre VMs, sin salida, usando br3502
+      internal:
+        managed: true
+        template:
+          VN_MAD: bridge
+          BRIDGE: br3502
+          GUEST_MTU: 1500
+          AR:
+            TYPE: IP4
+            IP: 172.16.10.50     # Inicio rango interno
+            SIZE: 50             # 50 IPs (172.16.10.50–172.16.10.99)
+          NETWORK_ADDRESS: 172.16.10.0
+          NETWORK_MASK: 255.255.255.0
+          GATEWAY: 172.16.10.1   # router/firewall interno
+          DNS: 9.9.9.9           # 
 
 frontend:
   hosts:
@@ -42,4 +59,5 @@ node:
   hosts:
     opennebula-kvm:
       ansible_host: 10.100.193.39
+
 
