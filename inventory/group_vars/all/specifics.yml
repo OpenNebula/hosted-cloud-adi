@@ -1,12 +1,12 @@
-# Disco y ruta en el HOST KVM
-adi_nfs_device: "/dev/vdb1"                 # ya formateado (no formateamos)
+# Disco / ruta en el HOST KVM
+adi_nfs_device: "/dev/vdb1"                 # Format realizado
 adi_nfs_mount: "/var/lib/one/datastores"
-adi_nfs_fstype: "xfs"                       # si no estás seguro, puedes usar "auto"
+adi_nfs_fstype: "xfs"                       # "auto"
 
 # Export NFS (KVM -> frontend)
-adi_nfs_frontend_host: "10.100.193.38"  # o su IP: "10.100.193.38"
+adi_nfs_frontend_host: "10.100.193.38"  # IP: "10.100.193.38"
 adi_nfs_export_opts: "rw,sync,no_root_squash,no_subtree_check,nohide"
 
-# Cliente NFS en el FRONTEND (a qué servidor conectarse)
-adi_nfs_server: "10.100.193.39"            # o IP del KVM: "10.100.193.39"
+# Cliente NFS FRONTEND 
+adi_nfs_server: "10.100.193.40"            # IP del KVM: "10.100.193.40"
 
