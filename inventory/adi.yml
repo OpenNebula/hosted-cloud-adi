@@ -57,7 +57,7 @@ frontend:
 
 node:
   hosts:
-    opennebula-kvm:
-      ansible_host: 10.100.193.39
+    bi-st1-srv-prod-l-onebulakvm-1:
+      ansible_host: 10.100.193.40
 
 
