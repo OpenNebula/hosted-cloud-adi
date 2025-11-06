@@ -1,5 +1,5 @@
 # Disco / ruta en el HOST KVM
-adi_nfs_device: "/dev/vdb1"                 # Format realizado
+adi_nfs_device: "/dev/sda1"                 # Format realizado
 adi_nfs_mount: "/var/lib/one/datastores"
 adi_nfs_fstype: "xfs"                       # "auto"
 
