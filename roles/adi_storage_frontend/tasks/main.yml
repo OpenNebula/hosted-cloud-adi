@@ -2,7 +2,7 @@
 # Rol: adi_storage_frontend
 # - Instala cliente NFS
 # - Monta la export del KVM en /var/lib/one/datastores (persistente)
-# NO toca permisos ni datastores de OpenNebula.
+# NO modificamos permisos ni datastores de OpenNebula.
 
 - name: Instalar NFS client
   apt:
