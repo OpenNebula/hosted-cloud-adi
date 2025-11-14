@@ -29,7 +29,7 @@ all:
             SIZE: 50            # 50 IPs (10.101.101.50–10.101.101.99)
           NETWORK_ADDRESS: 10.101.101.0
           NETWORK_MASK: 255.255.255.0
-          GATEWAY: 10.101.101.12
+          GATEWAY: 10.101.101.1
           DNS: 9.9.9.9
 
       # Red interna entre VMs, sin salida, usando br3502
