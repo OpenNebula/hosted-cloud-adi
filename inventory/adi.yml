@@ -16,7 +16,7 @@ all:
     db_backend: SQLite
 
     vn:
-      # public -internal vlan br3501, use vrouter to access the internet
+      # public -internal vlan br3501, use vmrouter to access the internet
       vxlan:
         managed: true
         template:
