@@ -42,7 +42,7 @@ Update the [inventory](./inventory/) values to match the provisioned infrastruct
 | Description                                 | Variable Names                      | Files/Location                                      |
 |---------------------------------------------|-------------------------------------|-----------------------------------------------------|
 | Frontend Host IP                            | `ansible_host`                      | [`inventory/adi.yml`](./inventory/adi.yml)    | 
-| KVM Host IPs                            | `ansible_host`                      | [`inventory/adi.yml`](./inventory/adi.yml)     | 
+| KVM Host IP                            | `ansible_host`                      | [`inventory/adi.yml`](./inventory/adi.yml)     | 
 | VXLAN BRIDGE                                 | `vn.vxlan.template.BRIDGE`          | [`inventory/adi.yml`](./inventory/adi.yml)                               | 
 | Internal BRIDGE                              | `vn.internal.template.BRIDGE`       | [`inventory/adi.yml`](./inventory/adi.yml)                               | 
 | VMs Public IP                              | `vn.vxlan.template.IP`       | [`inventory/adi.yml`](./inventory/adi.yml)                               |
