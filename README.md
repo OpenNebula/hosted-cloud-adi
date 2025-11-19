@@ -45,6 +45,10 @@ Update the [inventory](./inventory/) values to match the provisioned infrastruct
 | KVM Host IPs                            | `ansible_host`                      | [`inventory/adi.yml`](./inventory/adi.yml)     | 
 | VXLAN BRIDGE                                 | `vn.vxlan.template.BRIDGE`          | [`inventory/adi.yml`](./inventory/adi.yml)                               | 
 | Internal BRIDGE                              | `vn.internal.template.BRIDGE`       | [`inventory/adi.yml`](./inventory/adi.yml)                               | 
+| VMs Public IP                              | `vn.vxlan.template.IP`       | [`inventory/adi.yml`](./inventory/adi.yml)                               |
+| VMs Public Network                              | `vn.vxlan.template.NETWORK_ADDRESS`       | [`inventory/adi.yml`](./inventory/adi.yml)                               |
+| VMs Public Network Mask                         | `vn.vxlan.template.NETWORK_MASK`       | [`inventory/adi.yml`](./inventory/adi.yml)                               |
+| VMs Public Network Gateway                         | `vn.vxlan.template.GATEWAY`       | [`inventory/adi.yml`](./inventory/adi.yml)                               |
 | GUI password of `oneadmin`       | `one_pass` | [`inventory/adi.yml`](./inventory/adi.yml)           | 
 | NFS device                                 | `adi_nfs_device`                      |[`inventory/adi.yml`](./inventory/group_vars/all/specifics.yml) |
 | NFS frontend host                          | `adi_nfs_frontend_host`                      |[`inventory/adi.yml`](./inventory/group_vars/all/specifics.yml) |
