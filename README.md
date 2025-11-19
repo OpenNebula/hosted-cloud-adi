@@ -42,11 +42,11 @@ Update the [inventory](./inventory/) values to match the provisioned infrastruct
 | Description                                 | Variable Names                      | Files/Location                                      |
 |---------------------------------------------|-------------------------------------|-----------------------------------------------------|
 | Frontend Host IP                            | `ansible_host`                      | [`inventory/adi.yml`](./inventory/adi.yml)    | 
-| KVM Host IPs                            | `ansible_host`                      | [inventory/*.yml](./inventory/adi.yml)     | 
-| VXLAN PHYDEV                                 | `vn.vxlan.template.PHYDEV`          | [inventory/*.yml](./inventory/adi.yml)                               | 
-| pubridge PHYDEV                              | `vn.pubridge.template.PHYDEV`       | [inventory/*.yml](./inventory/adi.yml)                               | 
-| VMs Public IP Range                        | `vn.pubridge.template.AR.IP`, `vn.pubridge.template.AR.SIZE` | [inventory/*.yml](./inventory/adi.yml)           | 
-| GUI password of `oneadmin`       | `one_pass` | [inventory/*.yml](./inventory/adi.yml)           | 
+| KVM Host IPs                            | `ansible_host`                      | [`inventory/adi.yml`](./inventory/adi.yml)     | 
+| VXLAN PHYDEV                                 | `vn.vxlan.template.PHYDEV`          | [`inventory/adi.yml`](./inventory/adi.yml)                               | 
+| pubridge PHYDEV                              | `vn.pubridge.template.PHYDEV`       | [`inventory/adi.yml`](./inventory/adi.yml)                               | 
+| VMs Public IP Range                        | `vn.pubridge.template.AR.IP`, `vn.pubridge.template.AR.SIZE` | [`inventory/adi.yml`](./inventory/adi.yml)           | 
+| GUI password of `oneadmin`       | `one_pass` | [`inventory/adi.yml`](./inventory/adi.yml)           | 
 |  **{Cloud Provider's params}** |  **{Name of variable}** |  **{Affected files}** |.
 
 ## Deployment and Validation
