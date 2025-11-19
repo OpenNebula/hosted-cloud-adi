@@ -47,7 +47,9 @@ Update the [inventory](./inventory/) values to match the provisioned infrastruct
 | pubridge PHYDEV                              | `vn.pubridge.template.PHYDEV`       | [`inventory/adi.yml`](./inventory/adi.yml)                               | 
 | VMs Public IP Range                        | `vn.pubridge.template.AR.IP`, `vn.pubridge.template.AR.SIZE` | [`inventory/adi.yml`](./inventory/adi.yml)           | 
 | GUI password of `oneadmin`       | `one_pass` | [`inventory/adi.yml`](./inventory/adi.yml)           | 
-| NFS device                                 | `adi_nfs_device`                      |[`inventory/adi.yml`](./inventory/group_vars/all/specifics.yml) |.
+| NFS device                                 | `adi_nfs_device`                      |[`inventory/adi.yml`](./inventory/group_vars/all/specifics.yml) |
+| NFS frontend host                          | `adi_nfs_frontend_host`                      |[`inventory/adi.yml`](./inventory/group_vars/all/specifics.yml) |
+| NFS server                                 | `adi_nfs_server`                      |[`inventory/adi.yml`](./inventory/group_vars/all/specifics.yml) |.
 
 ## Deployment and Validation
 
