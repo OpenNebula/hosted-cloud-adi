@@ -1,9 +1,9 @@
 ---
 # Rol: adi_storage_kvm
-# - Monta /dev/vdb1 en /var/lib/one/datastores (persistente)
-# - Instala y configura NFS server
-# - Exporta /var/lib/one/datastores al frontend
-# - Ajusta permisos para oneadmin
+# - Mount /dev/device /var/lib/one/datastores (persistent)
+# - Install and configure NFS server
+# - Export /var/lib/one/datastores to the frontend
+# - Permissions for oneadmin
 
 - name: Asegurar carpeta de montaje existe
   ansible.builtin.file:
