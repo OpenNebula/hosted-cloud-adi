@@ -16,7 +16,7 @@ all:
     db_backend: SQLite
 
     vn:
-      # Red "pública" qbr3501, Se usa vrouter
+      # public -internal vlan br3501, use vrouter to access the internet
       vxlan:
         managed: true
         template:
@@ -25,14 +25,14 @@ all:
           GUEST_MTU: 1500
           AR:
             TYPE: IP4
-            IP: 10.101.101.2   # Inicio rango
+            IP: 10.101.101.2   
             SIZE: 1            # 1 IPs (vmrouter ip)
           NETWORK_ADDRESS: 10.101.101.0
           NETWORK_MASK: 255.255.255.0
           GATEWAY: 10.101.101.1
           DNS: 9.9.9.9
 
-      # Red interna entre VMs, sin salida, usando br3502
+      # internal network, br3502
       internal:
         managed: true
         template:
@@ -41,11 +41,11 @@ all:
           GUEST_MTU: 1500
           AR:
             TYPE: IP4
-            IP: 172.16.10.50     # Inicio rango interno
+            IP: 172.16.10.50     
             SIZE: 100             # 100 IPs (172.16.10.50–172.16.10.149)
           NETWORK_ADDRESS: 172.16.10.0
           NETWORK_MASK: 255.255.255.0
-          GATEWAY: 172.16.10.1   # vrouter/firewall interno
+          GATEWAY: 172.16.10.1   # (vmrouter ip)
           DNS: 9.9.9.9           # 
 
 frontend:
