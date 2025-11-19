@@ -41,7 +41,7 @@ Update the [inventory](./inventory/) values to match the provisioned infrastruct
 
 | Description                                 | Variable Names                      | Files/Location                                      |
 |---------------------------------------------|-------------------------------------|-----------------------------------------------------|
-| Frontend Host IP                            | `ansible_host`                      | [inventory/*.yml](./inventory/adi.yml)    | 
+| Frontend Host IP                            | `ansible_host`                      | [`inventory/adi.yml`](./inventory/adi.yml)    | 
 | KVM Host IPs                            | `ansible_host`                      | [inventory/*.yml](./inventory/adi.yml)     | 
 | VXLAN PHYDEV                                 | `vn.vxlan.template.PHYDEV`          | [inventory/*.yml](./inventory/adi.yml)                               | 
 | pubridge PHYDEV                              | `vn.pubridge.template.PHYDEV`       | [inventory/*.yml](./inventory/adi.yml)                               | 
