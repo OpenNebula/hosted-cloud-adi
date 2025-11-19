@@ -1,5 +1,5 @@
 ---
-# 1) Prepara el almacenamiento en el KVM (disco y export NFS)
+# 1) Storage on the KVM (disk and NFS export)
 - hosts: "{{ node_group | d('node') }}"
   gather_facts: false
   any_errors_fatal: true
@@ -9,7 +9,7 @@
   roles:
     - role: adi_storage_kvm
 
-# 2) Monta el almacenamiento compartido en el frontend (cliente NFS)
+# 2) Mount shared storage on the frontend (nfs client)
 - hosts: "{{ frontend_group | d('frontend') }}"
   gather_facts: false
   any_errors_fatal: true
