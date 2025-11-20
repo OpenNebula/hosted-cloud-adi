@@ -50,14 +50,14 @@ all:
 
 frontend:
   hosts:
-    opennebula-frontend:
+    frontend:
       ansible_host: 10.100.193.38
       ansible_connection: local
       
 
 node:
   hosts:
-    bi-st1-srv-prod-l-onebulakvm-1:
+    kvm1:
       ansible_host: 10.100.193.40
 
 
