@@ -25,11 +25,11 @@ all:
           GUEST_MTU: 1500
           AR:
             TYPE: IP4
-            IP: 10.101.101.2   
+            IP: 192.168.2.2   
             SIZE: 1            # 1 IPs (vmrouter ip)
-          NETWORK_ADDRESS: 10.101.101.0
+          NETWORK_ADDRESS: 192.168.2.0
           NETWORK_MASK: 255.255.255.0
-          GATEWAY: 10.101.101.1
+          GATEWAY: 192.168.2.1
           DNS: 9.9.9.9
 
       # internal network, br3502
@@ -41,23 +41,23 @@ all:
           GUEST_MTU: 1500
           AR:
             TYPE: IP4
-            IP: 172.16.10.50     
+            IP: 172.20.10.50     
             SIZE: 100             # 100 IPs (172.16.10.50–172.16.10.149)
-          NETWORK_ADDRESS: 172.16.10.0
+          NETWORK_ADDRESS: 172.20.10.0
           NETWORK_MASK: 255.255.255.0
-          GATEWAY: 172.16.10.1   # (vmrouter ip)
+          GATEWAY: 172.20.10.1   # (vmrouter ip)
           DNS: 9.9.9.9           # 
 
 frontend:
   hosts:
     frontend:
-      ansible_host: 10.100.193.38
+      ansible_host: 192.168.3.50
       ansible_connection: local
       
 
 node:
   hosts:
     kvm1:
-      ansible_host: 10.100.193.40
+      ansible_host: 192.168.3.51
 
 
