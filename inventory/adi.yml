@@ -16,12 +16,12 @@ all:
     db_backend: SQLite
 
     vn:
-      # public -internal vlan br3501, use vmrouter to access the internet
+      # public -internal vlan br1500, use vmrouter to access the internet
       vxlan:
         managed: true
         template:
           VN_MAD: bridge
-          BRIDGE: br3501
+          BRIDGE: br1500
           GUEST_MTU: 1500
           AR:
             TYPE: IP4
@@ -32,17 +32,17 @@ all:
           GATEWAY: 192.168.2.1
           DNS: 9.9.9.9
 
-      # internal network, br3502
+      # internal network, br1501
       internal:
         managed: true
         template:
           VN_MAD: bridge
-          BRIDGE: br3502
+          BRIDGE: br1501
           GUEST_MTU: 1500
           AR:
             TYPE: IP4
             IP: 172.20.10.50     
-            SIZE: 100             # 100 IPs (172.16.10.50–172.16.10.149)
+            SIZE: 100             # 100 IPs (172.20.10.50–172.20.10.149)
           NETWORK_ADDRESS: 172.20.10.0
           NETWORK_MASK: 255.255.255.0
           GATEWAY: 172.20.10.1   # (vmrouter ip)
