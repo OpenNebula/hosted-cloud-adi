@@ -52,7 +52,7 @@ validation:
   #    - Raw JSON data at /tmp/conn-matrix-raw-data.json
   run_conn_matrix: true
   conn_matrix:
-    bridge_name: br1500
+    bridge_name: br3501
     ping_count: 10
     vnet_name: vxlan
 
@@ -71,16 +71,16 @@ validation:
     vnet:
       name: 'ADI_TEST_VM_NET1'
       desc: 'A test network for post-deployment cloud verification'
-      bridge: 'br1501'
+      bridge: 'br3501'
       vn_mad: 'bridge'
-      phydev: 'bond0.1501'
-      network_address: '172.16.20.0'
+      phydev: 'bond0.3501'
+      network_address: '10.101.101.0'
       network_mask: '255.255.255.0'
       dns: '9.9.9.9'
-      gateway: '172.16.20.1'
+      gateway: '10.101.101.1'
       ar:
         - type: "IP4"
-          ip: '172.16.20.111'
+          ip: '10.101.101.111'
           size: '10'
 
   # TEST CASE NAME: VM High Availability
