@@ -43,6 +43,11 @@ all:
             TYPE: IP4
             IP: 172.16.10.50     
             SIZE: 100             # 100 IPs (172.16.10.50–172.16.10.149)
+
+            TYPE: IP4
+            IP: 172.16.10.1
+            SIZE: 1
+            
           NETWORK_ADDRESS: 172.16.10.0
           NETWORK_MASK: 255.255.255.0
           GATEWAY: 172.16.10.1   # (vmrouter ip)
